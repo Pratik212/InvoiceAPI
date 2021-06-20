@@ -41,6 +41,7 @@ namespace InvoiceApp
             });
 
             services.AddTransient<ICompanyRepository, CompanyRepository>();
+            services.AddTransient<IBillingRepository, BillingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

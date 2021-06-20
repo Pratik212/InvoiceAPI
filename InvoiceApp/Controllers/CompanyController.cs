@@ -18,7 +18,9 @@ namespace InvoiceApp.Controllers
             _context = context;
             _companyRepository = companyRepository;
         }
-        
+
+        #region POSTAPI
+
         [HttpPost]
         [Route("")]
         [ProducesResponseType(200)]
@@ -45,5 +47,8 @@ namespace InvoiceApp.Controllers
                 company.PhoneNumber
             });
         }
+
+        #endregion
+       
     }
 }
