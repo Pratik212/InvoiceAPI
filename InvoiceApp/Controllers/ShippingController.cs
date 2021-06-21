@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using InvoiceApp.Dtos;
 using InvoiceApp.Exceptions;
 using InvoiceApp.Helpers;
@@ -64,7 +65,7 @@ namespace InvoiceApp.Controllers
         {
             var shipAdd = await _shippingRepository.GetAll();
             
-            if (shipAdd == null) throw new ApiExceptions($"{Message.S001}");
+            if (shipAdd.Count() == 0) throw new ApiExceptions($"{Message.S001}");
 
             return Ok(new
             {

@@ -63,7 +63,7 @@ namespace InvoiceApp.Controllers
         {
             var companies = await _companyRepository.GetCompany();
             
-            if (companies == null) throw new ApiExceptions($"{Message.C001}");
+            if (companies.Count == 0) throw new ApiExceptions($"{Message.C001}");
 
             return Ok(new
             {
@@ -81,7 +81,7 @@ namespace InvoiceApp.Controllers
         {
             var companies = await _companyRepository.GetCompanyById(id);
             
-            if (companies.Id != id) throw new ApiExceptions($"{Message.C002}");
+            if (companies == null) throw new ApiExceptions($"{Message.C002}");
 
             return Ok(new
             {

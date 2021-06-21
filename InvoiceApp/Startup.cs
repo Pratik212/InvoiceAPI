@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InvoiceApp.Helpers;
 using InvoiceApp.Interfaces;
 using InvoiceApp.Providers;
 using Microsoft.AspNetCore.Builder;
@@ -55,6 +56,7 @@ namespace InvoiceApp
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "InvoiceApp v1"));
             }
 
+            app.ConfigureCustomExceptionMiddleware();
             app.UseHttpsRedirection();
 
             app.UseRouting();

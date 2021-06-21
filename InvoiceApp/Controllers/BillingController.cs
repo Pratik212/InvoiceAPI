@@ -82,7 +82,7 @@ namespace InvoiceApp.Controllers
         {
             var billing = await _billingRepository.GetBillingById(id);
             
-            if (billing.Id != id) throw new ApiExceptions($"{Message.B002}");
+            if (billing == null) throw new ApiExceptions($"{Message.B002}");
 
             return Ok(new
             {
