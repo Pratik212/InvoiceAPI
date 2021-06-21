@@ -44,6 +44,8 @@ namespace InvoiceApp
             services.AddTransient<ICompanyRepository, CompanyRepository>();
             services.AddTransient<IBillingRepository, BillingRepository>();
             services.AddTransient<IShippingRepository, ShippingRepository>();
+            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
