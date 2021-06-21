@@ -30,6 +30,18 @@ namespace InvoiceApp.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> Add([FromForm] CompanyDto companyDto)
         {
+            var comEmail = await _companyRepository.GetCompanyByEmail(companyDto.Email);
+            
+            if (comEmail != null) throw new ApiExceptions($"{Message.C005}");
+            
+            var comPhone = await _companyRepository.GetCompanyByMobile(companyDto.PhoneNumber);
+            
+            if (comPhone != null) throw new ApiExceptions($"{Message.C003}");
+
+            var comName = await _companyRepository.GetCompanyByName(companyDto.Name);
+            
+            if (comName != null) throw new ApiExceptions($"{Message.C004}");
+
             var company = new Company()
             {
                 Name = companyDto.Name,
@@ -38,6 +50,7 @@ namespace InvoiceApp.Controllers
                 PhoneNumber = companyDto.PhoneNumber
             };
 
+           
             company = await _companyRepository.AddCompany(company);
             
             await _companyRepository.SaveChanges();

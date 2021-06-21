@@ -39,5 +39,26 @@ namespace InvoiceApp.Providers
 
             return companies;
         }
+
+        public async Task<Company> GetCompanyByMobile(string phoneNumber)
+        {
+            var company = await _context.Companies.FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber);
+
+            return company;
+        }
+
+        public async Task<Company> GetCompanyByName(string name)
+        {
+            var company = await _context.Companies.FirstOrDefaultAsync(x => x.Name == name);
+
+            return company;
+        }
+
+        public async Task<Company> GetCompanyByEmail(string email)
+        {
+            var company = await _context.Companies.FirstOrDefaultAsync(x => x.Email == email);
+
+            return company;
+        }
     }
 }

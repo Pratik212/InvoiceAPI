@@ -36,9 +36,11 @@ namespace InvoiceApp.Controllers
                 Description = productDto.Description,
                 Qty = productDto.Qty,
                 UnitPrice = productDto.UnitPrice,
-                Total = productDto.Total,
-                SubTotal = productDto.SubTotal
             };
+
+            productData.Total = productDto.Qty * productDto.UnitPrice;
+
+            productData.SubTotal = productData.Total;
 
             var result = await _productRepository.AddProduct(productData);
 

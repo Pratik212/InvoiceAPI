@@ -10,9 +10,5 @@ namespace InvoiceApp.Dtos
         public int Qty { get; set; }
 
         public double UnitPrice { get; set; }
-
-        public double Total { get; set; }
-
-        public double SubTotal { get; set; }
     }
 }

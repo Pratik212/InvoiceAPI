@@ -12,5 +12,10 @@ namespace InvoiceApp.Interfaces
         Task<List<Company>> GetCompany();
 
         Task<Company> GetCompanyById(long id);
+
+        Task<Company> GetCompanyByMobile(string phoneNumber);
+        Task<Company> GetCompanyByName(string name);
+
+        Task<Company> GetCompanyByEmail(string email);
     }
 }
