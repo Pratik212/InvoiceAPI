@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using InvoiceApp.Dtos;
+using InvoiceApp.Exceptions;
+using InvoiceApp.Helpers;
 using InvoiceApp.Interfaces;
 using InvoiceApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +62,8 @@ namespace InvoiceApp.Controllers
         public async Task<IActionResult> GetAll()
         {
             var companies = await _companyRepository.GetCompany();
+            
+            if (companies == null) throw new ApiExceptions($"{Message.C001}");
 
             return Ok(new
             {
@@ -76,6 +80,8 @@ namespace InvoiceApp.Controllers
         public async Task<IActionResult> GetCompanyById(long id)
         {
             var companies = await _companyRepository.GetCompanyById(id);
+            
+            if (companies.Id != id) throw new ApiExceptions($"{Message.C002}");
 
             return Ok(new
             {
