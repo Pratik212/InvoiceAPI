@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using InvoiceApp.Dtos;
 using InvoiceApp.Interfaces;
 using InvoiceApp.Models;
@@ -46,6 +47,47 @@ namespace InvoiceApp.Controllers
                 company.Address,
                 company.PhoneNumber
             });
+        }
+
+        #endregion
+
+        #region GETAPI
+
+        [HttpGet]
+        [Route("all")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetAll()
+        {
+            var companies = await _companyRepository.GetCompany();
+
+            return Ok(new
+            {
+                companies
+            });
+
+
+        } 
+        
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetCompanyById(long id)
+        {
+            var companies = await _companyRepository.GetCompanyById(id);
+
+            return Ok(new
+            {
+                companies.Id,
+                companies.Name,
+                companies.Email,
+                companies.Address,
+                companies.PhoneNumber,
+                companies.CreatedAt
+            });
+
+
         }
 
         #endregion

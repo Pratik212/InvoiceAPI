@@ -51,5 +51,44 @@ namespace InvoiceApp.Controllers
         }
 
         #endregion
+
+        #region GET API
+
+        [HttpGet]
+        [Route("all")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+
+        public async Task<IActionResult> GetAll()
+        {
+            var billing = await _billingRepository.GetAll();
+
+            return Ok(new
+            {
+                billing
+            });
+        }
+        
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+
+        public async Task<IActionResult> GetBillingById(long id)
+        {
+            var billing = await _billingRepository.GetBillingById(id);
+
+            return Ok(new
+            {
+                billing.Id,
+                billing.ContactName,
+                billing.CompanyName,
+                billing.Email,
+                billing.Address,
+                billing.PhoneNumber,
+            });
+        }
+
+        #endregion
     }
 }

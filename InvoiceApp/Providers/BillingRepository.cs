@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using InvoiceApp.Interfaces;
 using InvoiceApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvoiceApp.Providers
 {
@@ -22,6 +24,18 @@ namespace InvoiceApp.Providers
             var billAdd = await _context.Billings.AddAsync(billing);
             await _context.SaveChangesAsync();
             return billAdd.Entity;
+        }
+
+        public async Task<IEnumerable<Billing>> GetAll()
+        {
+            return await _context.Billings.ToListAsync();
+        }
+
+        public async Task<Billing> GetBillingById(long id)
+        {
+            var billing = await _context.Billings.FirstOrDefaultAsync(x => x.Id == id);
+
+            return billing;
         }
     }
 }
