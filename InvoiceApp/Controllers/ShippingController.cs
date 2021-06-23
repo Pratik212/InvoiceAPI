@@ -29,11 +29,11 @@ namespace InvoiceApp.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
 
-        public async Task<IActionResult>Add([FromForm]ShippingDto shippingDto)
+        public async Task<IActionResult>Add([FromBody]ShippingDto shippingDto)
         {
             var shipAdd = new Shipping()
             {
-                DepartmentName    = shippingDto.DepartmentName,
+                DepartmentName = shippingDto.DepartmentName,
                 ClientCompany = shippingDto.ClientCompany,
                 Address = shippingDto.Address,
                 PhoneNumber = shippingDto.PhoneNumber

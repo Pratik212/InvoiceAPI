@@ -28,7 +28,7 @@ namespace InvoiceApp.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
 
-        public async Task<IActionResult> Add([FromForm]InvoiceDto invoiceDto)
+        public async Task<IActionResult> Add([FromBody]InvoiceDto invoiceDto)
         {
             var invoiceData = new Invoice()
             {

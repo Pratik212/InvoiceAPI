@@ -28,7 +28,7 @@ namespace InvoiceApp.Controllers
         [Route("")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Add([FromForm] CompanyDto companyDto)
+        public async Task<IActionResult> Add([FromBody] CompanyDto companyDto)
         {
             var comEmail = await _companyRepository.GetCompanyByEmail(companyDto.Email);
             

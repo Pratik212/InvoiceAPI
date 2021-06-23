@@ -27,7 +27,7 @@ namespace InvoiceApp.Controllers
         [Route("")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Add([FromForm] BillingDto billingDto)
+        public async Task<IActionResult> Add([FromBody] BillingDto billingDto)
         {
             var billAdd = new Billing()
             {

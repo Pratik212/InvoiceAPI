@@ -21,6 +21,7 @@ namespace InvoiceApp
 {
     public class Startup
     {
+        private readonly string MyAllowSpecificOrigins = "CorsPolicy";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -46,6 +47,18 @@ namespace InvoiceApp
             services.AddTransient<IShippingRepository, ShippingRepository>();
             services.AddTransient<IInvoiceRepository, InvoiceRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                            .WithExposedHeaders("X-Total-Quiz")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +73,7 @@ namespace InvoiceApp
 
             app.ConfigureCustomExceptionMiddleware();
             app.UseHttpsRedirection();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseRouting();
 
             app.UseAuthorization();
