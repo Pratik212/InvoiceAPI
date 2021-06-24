@@ -7,6 +7,7 @@ using InvoiceApp.Interfaces;
 using InvoiceApp.Models;
 using InvoiceApp.Wrappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvoiceApp.Controllers
 {
@@ -108,6 +109,39 @@ namespace InvoiceApp.Controllers
                 product.Total,
                 product.SubTotal
             });
+        }
+
+        #endregion
+
+        #region PUTAPI
+
+        [HttpPut]
+        [Route("{productId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> UpdateCaption(long productId, [FromBody] ProductDto productDto)
+        {
+            var productObj =
+                await _context.Products.FirstOrDefaultAsync(x => x.Id == productId);
+
+            if (productObj == null)
+                throw new ApiExceptions($"{Message.P001}");
+
+            productObj.Description = productDto.Description;
+            productObj.Qty = productDto.Qty;
+            productObj.UnitPrice = productDto.UnitPrice;
+            productObj.Total =  productObj.Qty * productObj.UnitPrice;
+            
+            await _context.SaveChangesAsync();
+
+            return Ok(new Response<dynamic>(new
+            {
+                productObj.Id,
+                productObj.Description,
+                productObj.Qty,
+                productObj.UnitPrice,
+                productObj.Total,
+            }, "Product successfully updated."));
         }
 
         #endregion
