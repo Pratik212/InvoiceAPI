@@ -119,7 +119,7 @@ namespace InvoiceApp.Controllers
         [Route("{productId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> UpdateCaption(long productId, [FromBody] ProductDto productDto)
+        public async Task<IActionResult> UpdateProduct(long productId, [FromBody] ProductDto productDto)
         {
             var productObj =
                 await _context.Products.FirstOrDefaultAsync(x => x.Id == productId);
