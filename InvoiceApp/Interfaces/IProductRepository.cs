@@ -11,5 +11,6 @@ namespace InvoiceApp.Interfaces
 
         Task<List<Product>> GetAll();
         Task<Product> GetProductById(long id);
+        Task Delete(List<long> productIds);
     }
 }

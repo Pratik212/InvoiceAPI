@@ -5,6 +5,7 @@ using InvoiceApp.Exceptions;
 using InvoiceApp.Helpers;
 using InvoiceApp.Interfaces;
 using InvoiceApp.Models;
+using InvoiceApp.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvoiceApp.Controllers
@@ -53,6 +54,17 @@ namespace InvoiceApp.Controllers
                 result.Total,
                 result.SubTotal
             });
+        }
+        
+        [HttpPost]
+        [Route("delete")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> DeleteProduct([FromBody] List<long> productIds)
+        {
+            await _productRepository.Delete(productIds);
+
+            return Ok(new Response<string>(null, "Product successfully deleted."));
         }
 
         #endregion

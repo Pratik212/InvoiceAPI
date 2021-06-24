@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using InvoiceApp.Interfaces;
 using InvoiceApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace InvoiceApp.Providers
 {
@@ -37,6 +39,15 @@ namespace InvoiceApp.Providers
             var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
 
             return product;
+        }
+
+        public async Task Delete(List<long> productIds)
+        {
+            var productObj = await _context.Products.Where(x => productIds.Contains(x.Id)).ToListAsync();
+        
+            foreach (var product in productObj) product.IsDeleted = true;
+        
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -34,7 +34,6 @@ namespace InvoiceApp.Controllers
             {
                 InvoiceNo = invoiceDto.InvoiceNo,
                 InvoiceDate = invoiceDto.InvoiceDate,
-                DueDate = invoiceDto.DueDate
             };
 
             var result = await _invoiceRepository.Add(invoiceData);
@@ -44,7 +43,6 @@ namespace InvoiceApp.Controllers
                 result.Id,
                 result.InvoiceNo,
                 result.InvoiceDate,
-                result.DueDate
             });
         }
 
@@ -85,7 +83,6 @@ namespace InvoiceApp.Controllers
                 invoiceData.Id,
                 invoiceData.InvoiceNo,
                 invoiceData.InvoiceDate,
-                invoiceData.DueDate
             });
         }
         #endregion
