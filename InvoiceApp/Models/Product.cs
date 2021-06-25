@@ -12,7 +12,9 @@
 
         public double Total { get; set; }
 
-        public double  SubTotal { get; set; }   
+        public double  SubTotal { get; set; }
+
+        public double TotalAmount { get; set; }
         
         public bool IsDeleted { get; set; } = false;
     }

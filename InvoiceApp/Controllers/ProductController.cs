@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using InvoiceApp.Dtos;
 using InvoiceApp.Exceptions;
@@ -43,9 +44,18 @@ namespace InvoiceApp.Controllers
             productData.Total = productDto.Qty * productDto.UnitPrice;
 
             productData.SubTotal = productData.Total;
-
+            
+            var productIds = await _context.Products.Select(x => x.Id).ToListAsync();
+            
+            var products = await _context.Products.Where(x => productIds.Contains(x.Id)).ToListAsync();
+            
             var result = await _productRepository.AddProduct(productData);
 
+            foreach (var product in products)
+            {
+                productData.TotalAmount += product.Total;
+            }
+            
             return Ok(new
             {
                 result.Id,
@@ -53,7 +63,8 @@ namespace InvoiceApp.Controllers
                 result.Qty,
                 result.UnitPrice,
                 result.Total,
-                result.SubTotal
+                result.SubTotal ,
+                result.TotalAmount
             });
         }
         
